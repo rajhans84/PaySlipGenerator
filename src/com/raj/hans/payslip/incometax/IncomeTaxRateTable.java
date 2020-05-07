@@ -1,5 +1,7 @@
 package com.raj.hans.payslip.incometax;
 
+import com.raj.hans.payslip.money.Money;
+
 public class IncomeTaxRateTable {
 	private IncomeTaxRate taxRateTable[];
 
@@ -8,7 +10,7 @@ public class IncomeTaxRateTable {
 		this.taxRateTable = taxRateTable;
 	}
 	
-	private int findTaxRange(int income) {
+	private int findTaxRange(Money income) {
 
 		int low = 0, high = this.taxRateTable.length - 1;
 
@@ -18,10 +20,12 @@ public class IncomeTaxRateTable {
 			int mid = (low + high) >> 1;
 
 			// did we found income?
-			if (income >= this.taxRateTable[mid].getLow() && income <= this.taxRateTable[mid].getHigh())
+			Money fromIncome = taxRateTable[mid].getLow(); 
+			Money toIncome = taxRateTable[mid].getHigh();
+			if (income.gtEq(fromIncome) && income.ltEq(toIncome))
 				return mid;
 
-			else if (income < this.taxRateTable[mid].getLow())
+			else if (income.lt(fromIncome))
 				high = mid - 1;
 
 			else
@@ -31,8 +35,8 @@ public class IncomeTaxRateTable {
 		return -1;
 	}
 	
-	public IncomeTaxRate getByIncome(int income) {
-		if(this.findTaxRange(income)>= 0) {
+	public IncomeTaxRate getByIncome(Money income) {
+		if(this.findTaxRange(income) >= 0) {
 			return this.taxRateTable[this.findTaxRange(income)];
 		}
 		return null;

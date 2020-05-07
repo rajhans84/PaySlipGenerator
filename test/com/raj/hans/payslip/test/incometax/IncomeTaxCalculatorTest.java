@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.raj.hans.payslip.incometax.IncomeTaxCalculator;
 import com.raj.hans.payslip.incometax.IncomeTaxRate;
 import com.raj.hans.payslip.incometax.IncomeTaxRateTable;
+import com.raj.hans.payslip.money.Money;
 
 class IncomeTaxCalculatorTest {
 	IncomeTaxCalculator taxCalc;
@@ -32,16 +33,16 @@ class IncomeTaxCalculatorTest {
 
 	@Test
 	void testIncomeTaxForMonth_case1() {
-		assertEquals(922, taxCalc.incomeTaxForMonth(60050));
+		assertEquals(922, taxCalc.incomeTaxForMonth(new Money(60050)).intValue());
 	}
 
 	@Test
 	void testIncomeTaxForMonth_case2() {
-		assertEquals(0, taxCalc.incomeTaxForMonth(10050));
+		assertEquals(0, taxCalc.incomeTaxForMonth(new Money(10050)).intValue());
 	}
 	
 	@Test
 	void testIncomeTaxForMonth_case3() {
-		assertEquals(2669, taxCalc.incomeTaxForMonth(120000));
+		assertEquals(2669, taxCalc.incomeTaxForMonth(new Money(120000)).intValue());
 	}
 }

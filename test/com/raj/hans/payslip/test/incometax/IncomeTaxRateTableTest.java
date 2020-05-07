@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import com.raj.hans.payslip.incometax.IncomeTaxRate;
 import com.raj.hans.payslip.incometax.IncomeTaxRateTable;
+import com.raj.hans.payslip.money.Money;
 class IncomeTaxRateTableTest {
 	IncomeTaxRate taxRates[];
 	IncomeTaxRateTable table;
@@ -33,22 +34,22 @@ class IncomeTaxRateTableTest {
 	@Test
 	void testGetByIncome_LowerRange() {
 		IncomeTaxRate expectedRate = taxRates[1];
-		assertEquals(expectedRate, table.getByIncome(37000));
+		assertEquals(expectedRate, table.getByIncome(new Money(37000)));
 	}
 
 	@Test
 	void testGetByIncome_MidRange() {
 		IncomeTaxRate expectedRate = taxRates[2];
-		assertEquals(expectedRate, table.getByIncome(67000));
+		assertEquals(expectedRate, table.getByIncome(new Money(67000)));
 	}
 	
 	@Test
 	void testGetByIncome_HighRange() {
 		IncomeTaxRate expectedRate = taxRates[3];
-		assertEquals(expectedRate, table.getByIncome(178000));
+		assertEquals(expectedRate, table.getByIncome(new Money(178000)));
 	}
 	@Test
 	void testGetByIncome_NotFound() {
-		assertEquals(null, table.getByIncome(9178000));
+		assertEquals(null, table.getByIncome(new Money(9178000)));
 	}
 }

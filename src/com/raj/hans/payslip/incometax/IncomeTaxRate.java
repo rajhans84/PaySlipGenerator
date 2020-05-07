@@ -1,27 +1,30 @@
 package com.raj.hans.payslip.incometax;
 
+import java.math.BigDecimal;
+
+import com.raj.hans.payslip.money.Money;
+
 public class IncomeTaxRate {
-	private int low; 
-	private int high;
-	private double rate;
-	private int offset;
+	private Money low; 
+	private Money high;
+	private BigDecimal rate;
+	private Money offset;
 	public IncomeTaxRate(int low, int high, double rate, int offset) {
-		super();
-		this.low = low;
-		this.high = high;
-		this.rate = rate;
-		this.offset = offset;
+		this.low = new Money(low);
+		this.high = new Money(high);
+		this.rate = new BigDecimal(rate);
+		this.offset = new Money(offset);
 	}
-	public int getLow() {
+	public Money getLow() {
 		return low;
 	}
-	public int getHigh() {
+	public Money getHigh() {
 		return high;
 	}
-	public double getRate() {
+	public BigDecimal getRate() {
 		return rate;
 	}
-	public int getOffset() {
+	public Money getOffset() {
 		return offset;
 	}
 }
